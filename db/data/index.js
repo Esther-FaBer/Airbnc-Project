@@ -10,4 +10,4 @@ const data = {
 };
 
 
-module.export = data[ENV];
+module.exports = data[ENV];
