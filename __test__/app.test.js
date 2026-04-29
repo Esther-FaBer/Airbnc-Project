@@ -25,7 +25,7 @@ describe("app", () => {
         });
         test("responds with an array of properties with a correct length", async () => {
             const { body } = await request(app).get("/api/properties");
-            expect(body.properties.length).toBe(11);
+            expect(body.properties.length).toBe(propertiesData.length);
         });
         test("responds with properties objects having the correct structure", async () => {
             const { body } = await request(app).get("/api/properties");
@@ -69,6 +69,10 @@ describe("app", () => {
                 .get("/api/properties/cat")
                 .expect(400);
                 expect(response.body.msg).toBe("Bad request.");
+        });
+        test("404: property not found", async () => {
+            const response = await request(app).get("api/properties/99999").expect(404);
+            expect(response.body.msg).toBe("Property not found.")        
         });
     });
     describe("GET/api/properties/{id}/reviews", () => {
@@ -132,6 +136,10 @@ describe("app", () => {
 
             expect(body.msg).toBe("Bad request.");
         });
+        test("404: property does not exist", async () => {
+            const postReview = { guest_id: 2, rating: 4, comment: "Great!"};
+            (await request(app).post("api/properties/99999/reviews")).send(postReview).expect(404);
+        })
 
     });
     describe("DELETE/api/reviews/{id}", () => {
