@@ -138,7 +138,9 @@ describe("app", () => {
         });
         test("404: property does not exist", async () => {
             const postReview = { guest_id: 2, rating: 4, comment: "Great!"};
-            (await request(app).post("api/properties/99999/reviews")).send(postReview).expect(404);
+            (await request(app).post("/api/properties/99999/reviews"))
+            .send(postReview)
+            .expect(404);
         })
 
     });
@@ -154,6 +156,9 @@ describe("app", () => {
                 .delete("/api/reviews/0")
                 .expect(404);
                 expect(response.body.msg).toBe("Review not found.");
+        });
+        test("404: invalid id format", async () => {
+            await request(app).delete("/api/reviews/cat").expect(400);
         });
     });
     });
