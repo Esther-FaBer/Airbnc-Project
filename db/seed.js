@@ -23,7 +23,7 @@ async function seed(property_types, users, properties, reviews) {
         email VARCHAR(50) NOT NULL,
         phone_number VARCHAR(50),
         is_host BOOLEAN NOT NULL,
-        avatar VARCHAR(50),
+        avatar TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );`);
     
@@ -31,8 +31,8 @@ async function seed(property_types, users, properties, reviews) {
     await db.query(`CREATE TABLE properties(
         property_id SERIAL PRIMARY KEY,
         host_id INT NOT NULL REFERENCES users(user_id),
-        name VARCHAR(50) NOT NULL,
-        location VARCHAR(50) NOT NULL,
+        name TEXT NOT NULL,
+        location TEXT NOT NULL,
         property_type VARCHAR(50) NOT NULL REFERENCES property_types(property_type),
         price_per_night DECIMAL NOT NULL CHECK (price_per_night > 0),
         description TEXT
@@ -43,7 +43,7 @@ async function seed(property_types, users, properties, reviews) {
         review_id SERIAL PRIMARY KEY,
         property_id INT NOT NULL REFERENCES properties(property_id),
         guest_id INT REFERENCES users(user_id),
-        rating INT NOT NULL,
+        rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
         comment TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);`);
 
