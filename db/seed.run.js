@@ -5,6 +5,11 @@ const { propertyTypesData, usersData, propertiesData, reviewsData } = require(".
 
 seed(propertyTypesData, usersData, propertiesData, reviewsData)
     .then(() => {
-        console.log("Seeding completed!");
+        console.log("Seed completed!");
         db.end();
+    })
+    .catch((err) => {
+        console.error("Seed failed:" , err);
+        db.end;
+        process.exit(1);
     });
