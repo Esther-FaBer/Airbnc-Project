@@ -4,7 +4,7 @@ const dropTables = require("./drops");
 const { createUserRef, createPropertyRef } = require("./utils")
 
 
-async function seed(property_types, users, properties, reviews, bookings) {
+async function seed(property_types, users, properties, reviews, bookings, favourites) {
 
     //drop existing table
     await dropTables();
@@ -56,9 +56,14 @@ async function seed(property_types, users, properties, reviews, bookings) {
         check_in_date DATE NOT NULL,
         check_out_date DATE NOT NULL,
         created_at TIMESTAMP DEFAULT;
-        )`)
+        )`);
 
     //create users favourites table
+    await db.query(`CREATE TABLE favourites (
+        favourite_id SERIAL PRIMARY KEY,
+        guest_id INT NOT NULL REFERENCES users(user_id),
+        property_id INT NOT NULL REFERENCES properties(property_id),
+        )`);
 
     //create users images table
     
