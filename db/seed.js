@@ -4,7 +4,7 @@ const dropTables = require("./drops");
 const { createUserRef, createPropertyRef } = require("./utils")
 
 
-async function seed(property_types, users, properties, reviews) {
+async function seed(property_types, users, properties, reviews, bookings) {
 
     //drop existing table
     await dropTables();
@@ -45,8 +45,26 @@ async function seed(property_types, users, properties, reviews) {
         guest_id INT REFERENCES users(user_id),
         rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
         comment TEXT,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);`);
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+        `);
 
+    //create users bookings table
+    await db.query(`CREATE TABLE bookings(
+        booking_id SERIAL PRIMARY KEY,
+        property_id INT NOT NULL REFERENCES properties(property_id),
+        guest_id INT  REFERENCES users(user_id),
+        check_in_date DATE NOT NULL,
+        check_out_date DATE NOT NULL,
+        created_at TIMESTAMP DEFAULT;
+        )`)
+
+    //create users favourites table
+
+    //create users images table
+    
+    //create users properties amenities table
+
+    //create users amenities table
 
     //insert data property_types
     const formatedPropertyTypeData =  property_types.map(({ property_type, description }) => [
