@@ -52,10 +52,10 @@ async function seed(property_types, users, properties, reviews, bookings, favour
     await db.query(`CREATE TABLE bookings(
         booking_id SERIAL PRIMARY KEY,
         property_id INT NOT NULL REFERENCES properties(property_id),
-        guest_id INT  REFERENCES users(user_id),
+        guest_id INT REFERENCES users(user_id),
         check_in_date DATE NOT NULL,
         check_out_date DATE NOT NULL,
-        created_at TIMESTAMP DEFAULT
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );`);
 
     //create users favourites table
@@ -72,17 +72,18 @@ async function seed(property_types, users, properties, reviews, bookings, favour
         image_url VARCHAR(100) NOT NULL,
         alt_text VARCHAR(100) NOT NULL
         )`);
-    
-    //create users properties amenities table
-    await db.query(`CREATE TABLE properties_amenities(
-        property_amenities SERIAL PRIMARY KEY,
-        property_id INT NOT NULL REFERENCES properties(property_id),
-        amenity_slug VARCHAR(100)
-        );`)
 
     //create users amenities table
     await db.query(`CREATE TABLE amenities(
-        amenity VARCHAR(100) PRIMARY KEY
+        amenity_slug VARCHAR(100) PRIMARY KEY,
+        amenity_name VARCHAR(100) NOT NULL
+        );`)
+
+    //create users properties amenities table
+    await db.query(`CREATE TABLE properties_amenities(
+        property_amenity_id SERIAL PRIMARY KEY,
+        property_id INT NOT NULL REFERENCES properties(property_id),
+        amenity_slug VARCHAR(100) NOT NULL REFERENCES amenities(amenity_slug)
         );`)
 
     //insert data property_types
