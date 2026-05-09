@@ -140,6 +140,18 @@ async function seed(property_types, users, properties, reviews, bookings, favour
             `INSERT INTO reviews (property_id, guest_id, rating, comment, created_at) VALUES %L RETURNING *`,
              formatedReviewsData
         ));
+
+    //insert data bookings
+    if (bookings && bookings.length) {
+        const formatedBookingData = bookings.map(
+            ({property_name, guest_name, check_in_date, check_out_date}) => [
+                propertiesRef[properties_name],
+                userRef[guest_name],
+                check_in_date,
+                check_out_date
+            ]
+        );
+    }
         
 
 }
