@@ -12,6 +12,8 @@ function createUserRef(users) {
 function createPropertyRef(properties) {
     const ref= {};
 
+    if (properties.length === 0) return ref;
+    
     properties.forEach((property) => {
         ref[property.name] = property.property_id;
     });

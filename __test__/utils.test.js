@@ -66,7 +66,7 @@ describe("Properties: manipulate Host_name from users table", () => {
     })
 });
 
-describe.only("assigns user_id to host_id", () => {
+describe("assigns user_id to host_id", () => {
     test("returns empty object when passed empty array", () => {
         expect(getHostId([])).toEqual({});
     });
