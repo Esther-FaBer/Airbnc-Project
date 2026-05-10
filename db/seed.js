@@ -145,7 +145,7 @@ async function seed(property_types, users, properties, reviews, bookings, favour
     if (bookings && bookings.length) {
         const formatedBookingData = bookings.map(
             ({property_name, guest_name, check_in_date, check_out_date}) => [
-                propertiesRef[properties_name],
+                propertiesRef[property_name],
                 userRef[guest_name],
                 check_in_date,
                 check_out_date
@@ -158,6 +158,10 @@ async function seed(property_types, users, properties, reviews, bookings, favour
             )
         );
     };
+    //insert data favourites
+
+
+    
 }
 
 module.exports = seed;

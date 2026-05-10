@@ -1,6 +1,6 @@
 const { createUserRef, getHostName, getHostId }  = require("../db/utils.js");
 
-describe.only("Users: convert data from json in data for psql", () => {
+describe("Users: convert data from json in data for psql", () => {
     test("returns an empty object when passed an empty array", () => {
         expect(createUserRef([])).toEqual({});
         });
@@ -67,13 +67,11 @@ describe("Properties: manipulate Host_name from users table", () => {
 });
 
 describe.only("assigns user_id to host_id", () => {
-    test("takes a users_id and asigns it to a host_id", () => {
-
-        const testIs = [
-            ["Alice Johnson", 1],
-            ["Bob Smith", 2],
-            ["Emma Davies", 3]
-        ]
-        expect(getHostId(user_name)).toBe()
+    test("returns empty object when passed empty array", () => {
+        expect(getHostId([])).toEqual({});
+    });
+    test("assigns full name as key and user_id as value", () => {
+        const users = [{ user_id: 1, first_name: "Alice", surname: "Johnson" }];
+        expect(getHostId(users)).toEqual({ "Alice Johnson": 1 });
     });
 })
