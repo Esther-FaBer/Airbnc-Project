@@ -13,11 +13,16 @@ function createPropertyRef(properties) {
     const ref= {};
 
     if (properties.length === 0) return ref;
-    
+
     properties.forEach((property) => {
         ref[property.name] = property.property_id;
     });
     return ref;
 }
 
-module.exports = { createUserRef, createPropertyRef };
+function createFullName(first_name, surname) {
+    if(!first_name && !surname) return "Unknown Host";
+    return[first_name, surname].filter(Boolean).join(" ");
+}
+
+module.exports = { createUserRef, createPropertyRef, createFullName };
