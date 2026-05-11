@@ -25,4 +25,14 @@ function createFullName(first_name, surname) {
     return[first_name, surname].filter(Boolean).join(" ");
 }
 
-module.exports = { createUserRef, createPropertyRef, createFullName };
+function formatReviewsData(reviews, propertiesRef, userRef) {
+    return reviews.map(({ property_name, guest_name, rating, comment, created_at }) => [
+        propertiesRef[property_name],
+        userRef[guest_name],
+        rating,
+        comment,
+        created_at
+    ]);
+}
+
+module.exports = { createUserRef, createPropertyRef, createFullName, formatReviewsData };
