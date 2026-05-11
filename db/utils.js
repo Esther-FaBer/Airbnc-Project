@@ -35,4 +35,13 @@ function formatReviewsData(reviews, propertiesRef, userRef) {
     ]);
 }
 
-module.exports = { createUserRef, createPropertyRef, createFullName, formatReviewsData };
+function calcAverageRating(reviews, property_id) {
+    const propertyReviews = reviews.filter((review) => review.property_id === property_id);
+
+    if (propertyReviews.length === 0) return null;
+
+    const total = propertyReviews.reduce((sum, review) => sum + review.rating, 0);
+    return Math.round((total / propertyReviews.length) * 10) / 10;
+}
+
+module.exports = { createUserRef, createPropertyRef, createFullName, formatReviewsData, calcAverageRating };
