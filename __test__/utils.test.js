@@ -1,4 +1,4 @@
-const { createUserRef, getHostName, getHostId }  = require("../db/utils.js");
+const { createUserRef, getHostName, getHostId, formatReviewsData }  = require("../db/utils.js");
 
 describe("Users: convert data from json in data for psql", () => {
     test("returns an empty object when passed an empty array", () => {
@@ -73,5 +73,11 @@ describe("assigns user_id to host_id", () => {
     test("assigns full name as key and user_id as value", () => {
         const users = [{ user_id: 1, first_name: "Alice", surname: "Johnson" }];
         expect(getHostId(users)).toEqual({ "Alice Johnson": 1 });
+    });
+});
+
+describe("formatReviewData", () => {
+    test("return an empty array when passed empty arrays", () => {
+        expect(formatReviewsData([], {})).toEqual([]);
     });
 })
