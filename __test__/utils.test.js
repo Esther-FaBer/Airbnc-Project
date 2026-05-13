@@ -80,4 +80,13 @@ describe("formatReviewData", () => {
     test("return an empty array when passed empty arrays", () => {
         expect(formatReviewsData([], {})).toEqual([]);
     });
+    test("returns an array", () => {
+        const reviews = [
+            { property_name: "Cosy Cottage", guest_name: "Alice Johnson", rating: 4, comment: "Great stay!", created_at: "2024-01-10" }
+        ];
+        const propertiesRef = { "Cosy Cottage": 1 };
+        const userRef = { "Alice Johnson": 1 };
+
+        expect(Array.isArray(formatReviewsData(reviews, propertiesRef, userRef))).toBe(true);
+    });
 })
