@@ -89,4 +89,16 @@ describe("formatReviewData", () => {
 
         expect(Array.isArray(formatReviewsData(reviews, propertiesRef, userRef))).toBe(true);
     });
+    test("returns correctly formatted single review", () => {
+        const reviews = [
+            { property_name: "Cosy Cottage", guest_name: "Alice Johnson", rating: 4, comment: "Great stay!", created_at: "2024-01-10" }
+        ];
+        const propertiesRef = { "Cosy Cottage": 1 };
+        const userRef = { "Alice Johnson": 1 };
+
+        expect(formatReviewsData(reviews, propertiesRef, userRef)).toEqual([
+            [1, 1, 4, "Great stay!", "2024-01-10"]
+        ]);
+    });
+
 })
