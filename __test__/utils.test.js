@@ -115,4 +115,16 @@ describe("formatReviewData", () => {
         ]);
     });
 
-})
+    test("does not mutate the original reviews array", () => {
+        const reviews = [
+            { property_name: "Cosy Cottage", guest_name: "Alice Johnson", rating: 4, comment: "Great stay!", created_at: "2024-01-10" }
+        ];
+        const propertiesRef = { "Cosy Cottage": 1 };
+        const userRef = { "Alice Johnson": 1 };
+        const reviewsCopy = [...reviews];
+
+        formatReviewsData(reviews, propertiesRef, userRef);
+        expect(reviews).toEqual(reviewsCopy);
+    });
+});
+
