@@ -101,4 +101,18 @@ describe("formatReviewData", () => {
         ]);
     });
 
+    test("returns correctly formatted multiple reviews", () => {
+        const reviews = [
+            { property_name: "Cosy Cottage", guest_name: "Alice Johnson", rating: 4, comment: "Great stay!", created_at: "2024-01-10" },
+            { property_name: "Beach House", guest_name: "Bob Smith", rating: 5, comment: "Loved it!", created_at: "2024-02-15" }
+        ];
+        const propertiesRef = { "Cosy Cottage": 1, "Beach House": 2 };
+        const userRef = { "Alice Johnson": 1, "Bob Smith": 2 };
+
+        expect(formatReviewsData(reviews, propertiesRef, userRef)).toEqual([
+            [1, 1, 4, "Great stay!", "2024-01-10"],
+            [2, 2, 5, "Loved it!", "2024-02-15"]
+        ]);
+    });
+
 })
