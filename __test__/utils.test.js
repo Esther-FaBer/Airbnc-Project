@@ -128,3 +128,46 @@ describe("formatReviewData", () => {
     });
 });
 
+
+describe("calcAverageRating", () => {
+    test("returns null when no reviews exist for property", () => {
+        expect(calcAverageRating([], 1)).toBe(null);
+    });
+
+    test("returns correct average for a single review", () => {
+        const reviews = [{ property_id: 1, rating: 4 }];
+        expect(calcAverageRating(reviews, 1)).toBe(4);
+    });
+
+    test("returns correct average for multiple reviews", () => {
+        const reviews = [
+            { property_id: 1, rating: 4 },
+            { property_id: 1, rating: 5 },
+            { property_id: 1, rating: 3 }
+        ];
+        expect(calcAverageRating(reviews, 1)).toBe(4);
+    });
+    test("rounds average to 1 decimal place", () => {
+            const reviews = [
+                { property_id: 1, rating: 4 },
+                { property_id: 1, rating: 5 },
+                { property_id: 1, rating: 3 },
+                { property_id: 1, rating: 4 }
+            ];
+            expect(calcAverageRating(reviews, 1)).toBe(4);
+        });
+
+        test("only calculates average for the given property_id", () => {
+            const reviews = [
+                { property_id: 1, rating: 5 },
+                { property_id: 2, rating: 1 },  // should be ignored
+                { property_id: 1, rating: 3 }
+            ];
+            expect(calcAverageRating(reviews, 1)).toBe(4);
+        });
+
+        test("returns null when no reviews match the property_id", () => {
+            const reviews = [{ property_id: 2, rating: 4 }];
+            expect(calcAverageRating(reviews, 1)).toBe(null);
+        });
+});
