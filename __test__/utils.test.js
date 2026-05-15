@@ -1,4 +1,4 @@
-const { createUserRef, getHostName, getHostId, formatReviewsData }  = require("../db/utils.js");
+const { createUserRef, getHostName, getHostId, formatReviewsData, calcAverageRating }  = require("../db/utils.js");
 
 describe("Users: convert data from json in data for psql", () => {
     test("returns an empty object when passed an empty array", () => {
