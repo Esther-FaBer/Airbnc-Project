@@ -25,6 +25,11 @@ function createFullName(first_name, surname) {
     return[first_name, surname].filter(Boolean).join(" ");
 }
 
+function getHostName(hosts) {
+    if (hosts.length === 0) return "";
+    return hosts.map((host) => createFullName(host.first_name, host.surname));
+}
+
 function formatReviewsData(reviews, propertiesRef, userRef) {
     return reviews.map(({ property_name, guest_name, rating, comment, created_at }) => [
         propertiesRef[property_name],
@@ -44,4 +49,4 @@ function calcAverageRating(reviews, property_id) {
     return Math.round((total / propertyReviews.length) * 10) / 10;
 }
 
-module.exports = { createUserRef, createPropertyRef, createFullName, formatReviewsData, calcAverageRating };
+module.exports = { createUserRef, createPropertyRef, createFullName, getHostName, formatReviewsData, calcAverageRating };
