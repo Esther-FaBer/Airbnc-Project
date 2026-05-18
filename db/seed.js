@@ -153,8 +153,8 @@ async function seed(property_types, users, properties, reviews, bookings, favour
         );
         await db.query(
             format(
-                `INSERT INTO bookings (property_id, guest_if, check_in_date, check_out_date) VALUES %L`,
-                formattedBookingData
+                `INSERT INTO bookings (property_id, guest_id, check_in_date, check_out_date) VALUES %L`,
+                formatedBookingData
             )
         );
     };

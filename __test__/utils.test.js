@@ -128,7 +128,6 @@ describe("formatReviewData", () => {
     });
 });
 
-
 describe("calcAverageRating", () => {
     test("returns null when no reviews exist for property", () => {
         expect(calcAverageRating([], 1)).toBe(null);
