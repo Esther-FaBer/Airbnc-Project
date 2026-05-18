@@ -159,7 +159,20 @@ async function seed(property_types, users, properties, reviews, bookings, favour
         );
     };
     //insert data favourites
-
+    if (favourites && favourites.length) {
+        const formatedFavouritesData = favourites.map(
+            ({ guest_name, property_name }) => [
+                userRef[guest_name],
+                propertiesRef[property_name]
+            ]
+        );
+        await db.query(
+            format(
+                `INSERT INTO favourites (guest_id, property_id) VALUES %L`,
+                formatedFavouritesData
+            )
+        );
+    }
 
     
 }
