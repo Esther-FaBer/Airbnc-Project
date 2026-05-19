@@ -30,6 +30,15 @@ function getHostName(hosts) {
     return hosts.map((host) => createFullName(host.first_name, host.surname));
 }
 
+function getHostId(users) {
+    const ref = {};
+    if(user.length === 0) return ref;
+    users.forEach((user) => {
+        ref[createFullName(user.first_name, user.surname)] = user.user_id;
+        });
+        return ref;
+}
+
 function formatReviewsData(reviews, propertiesRef, userRef) {
     return reviews.map(({ property_name, guest_name, rating, comment, created_at }) => [
         propertiesRef[property_name],
@@ -49,4 +58,4 @@ function calcAverageRating(reviews, property_id) {
     return Math.round((total / propertyReviews.length) * 10) / 10;
 }
 
-module.exports = { createUserRef, createPropertyRef, createFullName, getHostName, formatReviewsData, calcAverageRating };
+module.exports = { createUserRef, createPropertyRef, createFullName, getHostName, getHostId, formatReviewsData, calcAverageRating };
