@@ -4,8 +4,8 @@
   "description": "Run `npm install` in the root of repo to install the dependencies required.",
   "main": "index.js",
   "scripts": {
-    "test": "jest app",
-    "test-utils": "jest utils",
+    "test": "jest app --forceExit",
+    "test-utils": "jest utils --forceExit",
     "seed": "node db/seed.run.js",
     "seed-test": "NODE_ENV=test node db/seed.run.js",
     "seed-dev": "node db/seed.run.js",

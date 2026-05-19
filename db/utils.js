@@ -32,7 +32,7 @@ function getHostName(hosts) {
 
 function getHostId(users) {
     const ref = {};
-    if(user.length === 0) return ref;
+    if(users.length === 0) return ref;
     users.forEach((user) => {
         ref[createFullName(user.first_name, user.surname)] = user.user_id;
         });

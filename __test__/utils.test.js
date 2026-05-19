@@ -1,4 +1,10 @@
 const { createUserRef, createPropertyRef, createFullName, getHostName, formatReviewsData, calcAverageRating }  = require("../db/utils.js");
+const db = require("../db/connection");
+
+afterAll(async () => {
+    await db.end();
+});
+
 
 describe("Users: convert data from json in data for psql", () => {
     test("returns an empty object when passed an empty array", () => {
