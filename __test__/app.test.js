@@ -71,10 +71,11 @@ describe("app", () => {
                 expect(response.body.msg).toBe("Bad request.");
         });
         test("404: property not found", async () => {
-            const response = await request(app).get("api/properties/99999").expect(404);
+            const response = await request(app).get("/api/properties/99999").expect(404);
             expect(response.body.msg).toBe("Property not found.")        
         });
     });
+
     describe("GET/api/properties/{id}/reviews", () => {
         test("should respond with status 200 and the right properties", async () => {
             const { body } = await request(app)

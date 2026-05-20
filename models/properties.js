@@ -16,7 +16,7 @@ exports.fetchProperties = async () =>{
         GROUP BY p.property_id, u.user_id`
     );
     
-    return rows;
+    return properties;
 };
 
 
