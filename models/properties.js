@@ -30,7 +30,6 @@ exports.fetchPropertyById =  async (property_id) => {
             p.price_per_night,
             p.description,
             CONCAT(u.first_name, ' ', u.surname) AS host_name,
-            u.avatar,
             ROUND(AVG(r.rating), 1) AS avg_rating
         FROM properties p
         JOIN users u ON p.host_id = u.user_id

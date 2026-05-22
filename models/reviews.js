@@ -34,5 +34,7 @@ exports.deleteReviewById = async(review_id) => {
         [review_id]
     );
    
-    return rows;
+    if (rows.length === 0) return null;
+    
+    return rows[0];
 };
