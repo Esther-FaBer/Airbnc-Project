@@ -5,6 +5,7 @@ const { getReviewsByPropertyId, postReviewByPropertyId, deleteReviewById } = req
 const { 
     handlePathNotFound, 
     handleBadRequests, 
+    handleNotFound,
     handleCustomsErrors,
     handleServerErrors, 
  } = require("./errors.js");
@@ -30,6 +31,7 @@ app.all("/all", handlePathNotFound);
 
 
 app.use(handleBadRequests);
+app.use(handleNotFound);
 app.use(handleCustomsErrors);
 app.use(handleServerErrors);
 

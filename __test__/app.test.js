@@ -139,9 +139,10 @@ describe("app", () => {
         });
         test("404: property does not exist", async () => {
             const postReview = { guest_id: 2, rating: 4, comment: "Great!"};
-            (await request(app).post("/api/properties/99999/reviews"))
-            .send(postReview)
-            .expect(404);
+            await request(app)
+                .post("/api/properties/99999/reviews")
+                .send(postReview)
+                .expect(404);
         })
 
     });
