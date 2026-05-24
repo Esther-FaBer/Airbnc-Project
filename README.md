@@ -1,42 +1,60 @@
-# AirBNC
+## AirBNC 🏡
 
-This is the source code for RESTful backend server which serves up properties related data.
+A RESTful backend API serving property rental data, built with Node.js, Express, and PostgreSQL following MVC architecture
 
-The server is built in `express` and connects with postgreSQL database.
+## Project Description
 
-You will need a postgreSQL server running in your machine.
+AirBNC is a backend server that powers a property rental platform — think Airbnb, but built from scratch. It exposes a set of REST API endpoints to manage properties, users, reviews, bookings, and favourites.
+The project uses Express for routing and middleware, PostgreSQL as the relational database, and node-postgres (pg) to connect and query the database. The MVC pattern keeps the codebase clean and maintainable, separating routing, business logic, and data access into distinct layers.
 
-You will user MVC structure to develop the web server.
+## Requirements
 
-## Project setup
+- Node.js v18 or higher
+- PostgreSQL v14 or higher running locally
 
-- Run `npm install` in the root of repo to install the dependencies required.
+## Installation
 
-- Run `npm run create_db` to create the database.
+1. Clone the repository:
 
-- Connect to the db  using `node-postgres`
+git clone https://github.com/your-username/airbnc.git
+cd airbnc
 
-- Create a `.env.test` file at the root level with the following content:
-```
-PGDATABASE=airbnc_test_01_test
-```
+2. Install dependencies:
 
-- Create a `.env.dev` file at the root level with the following content:
-```
-PGDATABASE=airbnc_test_01_dev
-```
+npm install
 
-For `.env.prod`  - reach out-
+3. Create the databases:
+
+npm run create-dbs
+
+## Environment Variables
+
+Create the following .env files at the root of the project:
+
+.env.test
+    PGDATABASE=airbnc_test_01_test
+
+.env.development
+    PGDATABASE=airbnc_test_01_dev
 
 
-## Seeding 
-To seed each database use the following scripts:
+For production credentials, please reach out to the project maintainer.
 
-test - `npm run seed-test`
+## Seeding
 
-dev - `npm run seed-dev`
+Seed each database using the following scripts:
 
-prod - `npm run seed-prod`
+Test: `npm run seed-test`
+Development: `npm run seed-dev`
+Production: `npm run seed-prod`
+
+
+## API Endpoints
+
+
+
+
+
 
 ## Tests
 
