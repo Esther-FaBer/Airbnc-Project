@@ -2,15 +2,18 @@
 
 A RESTful backend API serving property rental data, built with Node.js, Express, and PostgreSQL following MVC architecture
 
+
 ## Project Description
 
 AirBNC is a backend server that powers a property rental platform — think Airbnb, but built from scratch. It exposes a set of REST API endpoints to manage properties, users, reviews, bookings, and favourites.
 The project uses Express for routing and middleware, PostgreSQL as the relational database, and node-postgres (pg) to connect and query the database. The MVC pattern keeps the codebase clean and maintainable, separating routing, business logic, and data access into distinct layers.
 
+
 ## Requirements
 
 - Node.js v18 or higher
 - PostgreSQL v14 or higher running locally
+
 
 ## Installation
 
@@ -21,21 +24,22 @@ cd airbnc
 
 2. Install dependencies:
 
-npm install
+`npm install`
 
 3. Create the databases:
 
-npm run create-dbs
+`npm run create-dbs`
+
 
 ## Environment Variables
 
 Create the following .env files at the root of the project:
 
 .env.test
-    PGDATABASE=airbnc_test_01_test
+    `PGDATABASE=airbnc_test_01_test`
 
 .env.development
-    PGDATABASE=airbnc_test_01_dev
+    `PGDATABASE=airbnc_test_01_dev`
 
 
 For production credentials, please reach out to the project maintainer.
@@ -51,16 +55,15 @@ Production: `npm run seed-prod`
 
 ## API Endpoints
 
+GET     `/api/properties`               Returns all properties
+GET     `/api/properties/:id`           Returns a single property by ID
+GET     `/api/properties/:id/reviews`   Returns all reviews for a property
+POST    `/api/properties/:id/reviews`   Posts a new review for a property
+DELETE  `/api/reviews/:id`              Deletes a review by ID    
 
 
+## Running Tests
 
+Integration tests cover all endpoints using Jest and Supertest: `npm test` 
 
-
-## Tests
-
-integratiion testing is used for the endpoints. 
-
-Run command: `npm test` to run all tests.
-
-
-
+To run only the utility function tests: `npm run test-utils`
