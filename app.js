@@ -1,7 +1,8 @@
 const express = require("express")
 const cors = require('cors');
 const { getProperties, getPropertyById } = require("./controllers/properties");
-const { getReviewsByPropertyId, postReviewByPropertyId, deleteReviewById } = require("./controllers/reviews");
+const { getReviewsByPropertyId, postReviewByPropertyId, deleteReviewById, getReviewsByUserId, patchReview } = require("./controllers/reviews");
+const { getUserById, postUser, patchUser, deleteUser } = require("./controllers/users");
 const { 
     handlePathNotFound, 
     handleBadRequests, 
@@ -9,8 +10,6 @@ const {
     handleCustomsErrors,
     handleServerErrors, 
  } = require("./errors.js");
-const { getUsers, getUserById, postUser, patchUser, DeleteUSer } = require("./controllers/users");
-
 
 const app = express();
 
@@ -24,6 +23,8 @@ app.get("/api/properties/:id", getPropertyById);
 app.get("/api/properties/:id/reviews", getReviewsByPropertyId);
 app.post("/api/properties/:id/reviews", postReviewByPropertyId);
 
+app.get("/api/users/:id/reviews", getReviewsByUserId);
+app.patch("/api/reviews/:id", patchReview);
 app.delete("/api/reviews/:id", deleteReviewById);
 
 app.get("/api/users/:id", getUserById);
@@ -31,7 +32,7 @@ app.post("/api/users", postUser);
 app.patch("/api/users/:id", patchUser);
 app.delete("/api/users/:id", deleteUser)
 
-app.all("/all", handlePathNotFound);
+app.all(/.*/, handlePathNotFound);
 
 
 app.use(handleBadRequests);

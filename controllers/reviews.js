@@ -1,4 +1,4 @@
-const { fetchReviewsByPropertyId, insertReview, deleteReviewById } = require("../models/reviews");
+const { fetchReviewsByPropertyId, insertReview, deleteReviewById, fetchReviewsByUserId, updateReview } = require("../models/reviews");
 
 exports.getReviewsByPropertyId = async (req, res, next) => {
     const property_id = Number(req.params.id);
@@ -50,6 +50,38 @@ exports.deleteReviewById = async (req, res, next) => {
         }
 
         res.status(204).send();
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.getReviewsByUserId = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        if (isNaN(Number(id))) {
+            return res.status(400).send({ msg: "Bad request." });
+        }
+        const reviews = await fetchReviewsByUserId(id);
+        if (reviews.length === 0) {
+            return res.status(404).send({ msg: "No reviews found." });
+        }
+        res.status(200).send({ reviews });
+    } catch (err) {
+        next(err);
+    }
+};
+
+exports.patchReview = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        if (isNaN(Number(id))) {
+            return res.status(400).send({ msg: "Bad request." });
+        }
+        const review = await updateReview(id, req.body);
+        if (!review) {
+            return res.status(404).send({ msg: "Review not found." });
+        }
+        res.status(200).send({ review });
     } catch (err) {
         next(err);
     }
