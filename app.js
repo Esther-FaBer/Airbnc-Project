@@ -4,6 +4,7 @@ const { getProperties, getPropertyById } = require("./controllers/properties");
 const { getReviewsByPropertyId, postReviewByPropertyId, deleteReviewById, getReviewsByUserId, patchReview } = require("./controllers/reviews");
 const { getUserById, postUser, patchUser, deleteUser } = require("./controllers/users");
 const { getBookingsByUserId, postBooking, patchBooking, deleteBooking } = require("./controllers/bookings");
+const { getFavouritesByUserId, postFavourite, deleteFavourite } = require("./controllers/favourites");
 const { 
     handlePathNotFound, 
     handleBadRequests, 
@@ -37,6 +38,10 @@ app.get("/api/users/:id/bookings", getBookingsByUserId);
 app.post("/api/properties/:id/bookings", postBooking);
 app.patch("/api/bookings/:id", patchBooking);
 app.delete("/api/bookings/:id", deleteBooking);
+
+app.get("/api/users/:id/favourites", getFavouritesByUserId);
+app.post("/api/properties/:id/favourites", postFavourite);
+app.delete("/api/favourites/:id", deleteFavourite);
 
 app.all(/.*/, handlePathNotFound);
 
