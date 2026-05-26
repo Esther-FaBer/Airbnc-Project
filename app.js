@@ -3,6 +3,7 @@ const cors = require('cors');
 const { getProperties, getPropertyById } = require("./controllers/properties");
 const { getReviewsByPropertyId, postReviewByPropertyId, deleteReviewById, getReviewsByUserId, patchReview } = require("./controllers/reviews");
 const { getUserById, postUser, patchUser, deleteUser } = require("./controllers/users");
+const { getBookingsByUserId, postBooking, patchBooking, deleteBooking } = require("./controllers/bookings");
 const { 
     handlePathNotFound, 
     handleBadRequests, 
@@ -31,6 +32,11 @@ app.get("/api/users/:id", getUserById);
 app.post("/api/users", postUser);
 app.patch("/api/users/:id", patchUser);
 app.delete("/api/users/:id", deleteUser)
+
+app.get("/api/users/:id/bookings", getBookingsByUserId);
+app.post("/api/properties/:id/bookings", postBooking);
+app.patch("/api/bookings/:id", patchBooking);
+app.delete("/api/bookings/:id", deleteBooking);
 
 app.all(/.*/, handlePathNotFound);
 
