@@ -4,7 +4,7 @@ const dropTables = require("./drops");
 const { createUserRef, createPropertyRef } = require("./utils")
 
 
-async function seed(property_types, users, properties, reviews, bookings, favourites) {
+async function seed(property_types, users, properties, reviews, bookings, favourites, images) {
 
     //drop existing table
     await dropTables();
@@ -170,6 +170,23 @@ async function seed(property_types, users, properties, reviews, bookings, favour
             format(
                 `INSERT INTO favourites (guest_id, property_id) VALUES %L`,
                 formatedFavouritesData
+            )
+        );
+    }
+
+    //insert data images
+    if (images && images.length) {
+        const formatedImagesData = images.map(
+            ({ property_name, image_url, alt_tag }) => [
+                propertiesRef[property_name],
+                image_url,
+                alt_tag  // In JSON alt_tag --> alt_text
+            ]
+        );
+        await db.query(
+            format(
+                `INSERT INTO images (property_id, image_url, alt_text) VALUES %L`,
+                formatedImagesData
             )
         );
     }

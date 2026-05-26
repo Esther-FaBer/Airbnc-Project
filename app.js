@@ -5,6 +5,7 @@ const { getReviewsByPropertyId, postReviewByPropertyId, deleteReviewById, getRev
 const { getUserById, postUser, patchUser, deleteUser } = require("./controllers/users");
 const { getBookingsByUserId, postBooking, patchBooking, deleteBooking } = require("./controllers/bookings");
 const { getFavouritesByUserId, postFavourite, deleteFavourite } = require("./controllers/favourites");
+const { getImagesByPropertyId, postImage, deleteImage } = require("./controllers/images");
 const { 
     handlePathNotFound, 
     handleBadRequests, 
@@ -42,6 +43,10 @@ app.delete("/api/bookings/:id", deleteBooking);
 app.get("/api/users/:id/favourites", getFavouritesByUserId);
 app.post("/api/properties/:id/favourites", postFavourite);
 app.delete("/api/favourites/:id", deleteFavourite);
+
+app.get("/api/properties/:id/images", getImagesByPropertyId);
+app.post("/api/properties/:id/images", postImage);
+app.delete("/api/images/:id", deleteImage);
 
 app.all(/.*/, handlePathNotFound);
 
