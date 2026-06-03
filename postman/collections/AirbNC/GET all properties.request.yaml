@@ -1,0 +1,4 @@
+$kind: http-request
+url: http://localhost:9090/api/properties
+method: GET
+order: 1779918347251

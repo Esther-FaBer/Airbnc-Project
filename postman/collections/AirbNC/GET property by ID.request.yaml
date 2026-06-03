@@ -1,0 +1,5 @@
+$kind: http-request
+name: GET property by ID
+url: http://localhost:9090/api/properties/2
+method: GET
+order: 3769346195964348
