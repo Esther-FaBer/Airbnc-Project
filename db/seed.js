@@ -69,8 +69,8 @@ async function seed(property_types, users, properties, reviews, bookings, favour
     await db.query(`CREATE TABLE images(
         image_id SERIAL PRIMARY KEY,
         property_id INT NOT NULL REFERENCES properties(property_id),
-        image_url VARCHAR(100) NOT NULL,
-        alt_text VARCHAR(100) NOT NULL
+        image_url VARCHAR(2000) NOT NULL,
+        alt_text VARCHAR(2000) NOT NULL
         )`);
 
     //create users amenities table
